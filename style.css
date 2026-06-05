@@ -648,40 +648,31 @@ header p {
   color: var(--text-muted);
 }
 
-/* NATO Reference list */
-.reference-card {
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius-lg);
-  padding: 2rem;
-  box-shadow: var(--shadow-md);
-  margin-top: 1rem;
-  border: 4px solid #FFFFFF;
-}
-
+/* NATO Reference list - Compact, 3-column table style with no scrolling needed */
 .reference-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
 .reference-title {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.25rem;
   color: var(--text-main);
 }
 
 .search-input {
-  padding: 0.6rem 1.2rem;
-  font-size: 0.95rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
   border: 2px solid #EFECE6;
   border-radius: var(--border-radius-sm);
   outline: none;
   font-family: var(--font-body);
   transition: all 0.2s;
-  min-width: 200px;
+  min-width: 180px;
 }
 
 .search-input:focus {
@@ -690,72 +681,67 @@ header p {
 
 .ref-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 0.75rem;
-  max-height: 300px;
-  overflow-y: auto;
-  padding-right: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+  padding-right: 0;
+  max-height: none;
+  overflow-y: visible;
 }
 
-/* Custom scrollbar for reference list */
-.ref-grid::-webkit-scrollbar {
-  width: 6px;
-}
-
-.ref-grid::-webkit-scrollbar-track {
-  background: #F5F2EB;
-  border-radius: 3px;
-}
-
-.ref-grid::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
-  border-radius: 3px;
-  opacity: 0.5;
+@media (max-width: 520px) {
+  .ref-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .ref-item {
   background: #F9F7F3;
-  padding: 0.8rem;
+  padding: 0.35rem 0.6rem;
   border-radius: var(--border-radius-sm);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  position: relative;
+  justify-content: flex-start;
+  gap: 0.5rem;
   border: 2px solid transparent;
   transition: all 0.2s;
   cursor: pointer;
+  position: relative;
 }
 
 .ref-item:hover {
   background: #FFF;
   border-color: var(--primary-light);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: var(--shadow-sm);
 }
 
 .ref-letter {
   font-family: var(--font-display);
-  font-size: 1.8rem;
+  font-size: 1.15rem;
   color: var(--primary);
-  line-height: 1.1;
+  line-height: 1;
+  font-weight: 700;
+  width: 1rem;
 }
 
 .ref-word {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-main);
+  flex-grow: 1;
 }
 
 .ref-sound {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  opacity: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.5;
   transition: opacity 0.2s;
 }
 
 .ref-item:hover .ref-sound {
   opacity: 1;
+  color: var(--primary);
 }
 
 /* Footer & Reset Button */
