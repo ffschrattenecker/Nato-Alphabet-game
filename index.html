@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NATO Alphabet Academy | Play & Learn</title>
+  <meta name="description" content="A fun, creative, and lively interactive game to help you quickly master the NATO phonetic alphabet with speech audio, flashcards, quizzes, and spelling challenges.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>NATO Alphabet Academy</h1>
+    <p>Master communication phonetics with fun, interactive games!</p>
+  </header>
+
+  <main class="app-container">
+    
+    <!-- Navigation Tabs -->
+    <nav class="modes-bar" role="tablist">
+      <button class="mode-tab active" id="tab-flashcards" role="tab" aria-selected="true" aria-controls="screen-flashcards">
+        📇 Flashcards
+      </button>
+      <button class="mode-tab" id="tab-stats" role="tab" aria-selected="false" aria-controls="screen-stats">
+        📊 Stats
+      </button>
+      <button class="mode-tab" id="tab-typein" role="tab" aria-selected="false" aria-controls="screen-typein">
+        ⌨️ Type-In
+      </button>
+      <button class="mode-tab" id="tab-spelling" role="tab" aria-selected="false" aria-controls="screen-spelling">
+        ✏️ Spelling
+      </button>
+      <button class="mode-tab" id="tab-reference" role="tab" aria-selected="false" aria-controls="screen-reference">
+        📖 Lookup
+      </button>
+    </nav>
+
+    <!-- Main Game Container -->
+    <section class="card-wrapper">
+      
+      <!-- General Stats Bar inside the Card -->
+      <div class="stats-header">
+        <div class="stat-item">
+          <span>Score:</span>
+          <span class="stat-val" id="score-display">0</span>
+        </div>
+        <div class="stat-item">
+          <span>Streak:</span>
+          <span class="stat-val streak-val" id="streak-display">🔥 0</span>
+        </div>
+        <div>
+          <button class="icon-btn active" id="btn-audio-toggle" title="Toggle Audio Pronunciation" aria-label="Toggle sound">
+            🔊
+          </button>
+        </div>
+      </div>
+
+      <!-- SCREEN 1: Flashcards -->
+      <div class="screen active" id="screen-flashcards" role="tabpanel">
+        <div class="flashcard-area">
+          <div class="card-3d-container" id="flashcard-container" title="Click to flip card">
+            <div class="card-3d" id="flashcard">
+              <!-- Front Side -->
+              <div class="card-face front">
+                <div class="card-letter" id="card-front-letter">A</div>
+                <div class="card-hint-text">Click to flip</div>
+              </div>
+              <!-- Back Side -->
+              <div class="card-face back">
+                <div class="card-word" id="card-back-word">Alpha</div>
+                <div class="card-phonetic" id="card-back-phonetic">[AL-fah]</div>
+                <div class="card-hint-text">Click to flip</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-controls">
+            <button class="btn btn-secondary" id="btn-prev-card">← Prev</button>
+            <button class="btn btn-primary" id="btn-speak-card">🔊 Listen</button>
+            <button class="btn btn-secondary" id="btn-next-card">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 2: Stats Dashboard -->
+      <div class="screen" id="screen-stats" role="tabpanel">
+        <div class="stats-dashboard">
+          <div class="stats-summary-grid">
+            <div class="stats-summary-card">
+              <span class="summary-label">Accuracy</span>
+              <span class="summary-value" id="stats-accuracy">0%</span>
+            </div>
+            <div class="stats-summary-card">
+              <span class="summary-label">Total Answers</span>
+              <span class="summary-value" id="stats-total-attempts">0</span>
+            </div>
+            <div class="stats-summary-card">
+              <span class="summary-label">Weakest Letter</span>
+              <span class="summary-value" id="stats-weakest-letter">-</span>
+            </div>
+          </div>
+          
+          <div class="stats-section-title">Letter Mastery Map</div>
+          <div class="mastery-grid" id="mastery-grid">
+            <!-- Grid A-Z will be rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: Type-In -->
+      <div class="screen" id="screen-typein" role="tabpanel">
+        <div class="typein-area">
+          <div class="question-prompt">Type the NATO word for:</div>
+          <div class="question-highlight" id="typein-target-letter">C</div>
+          
+          <div class="input-container">
+            <input type="text" class="type-input" id="typein-input" placeholder="Type here..." autocomplete="off" spellcheck="false">
+            <button class="btn btn-primary" id="btn-submit-typein">Submit</button>
+          </div>
+          
+          <div class="feedback-box" id="typein-feedback"></div>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: Spelling -->
+      <div class="screen" id="screen-spelling" role="tabpanel">
+        <div class="typein-area">
+          <div class="question-prompt">Spell this word in NATO phonetics:</div>
+          <div class="spelling-word-display" id="spelling-word-container">
+            <!-- Dynamically generated letters -->
+          </div>
+          <div class="spelling-sub-prompt" id="spelling-instruction-text">
+            Enter NATO word for '<span id="spelling-current-char">C</span>':
+          </div>
+          
+          <div class="input-container">
+            <input type="text" class="type-input" id="spelling-input" placeholder="Enter word..." autocomplete="off" spellcheck="false">
+            <button class="btn btn-primary" id="btn-submit-spelling">Submit</button>
+          </div>
+          
+          <div class="feedback-box" id="spelling-feedback"></div>
+        </div>
+      </div>
+
+      <!-- SCREEN 5: Lookup Table Tab -->
+      <div class="screen" id="screen-reference" role="tabpanel">
+        <div class="reference-header" style="margin-bottom: 1rem;">
+          <h2 class="reference-title" style="font-size: 1.3rem;">📖 NATO Phonetic Reference</h2>
+          <input type="text" class="search-input" id="ref-search" placeholder="Search letter or word..." aria-label="Search Reference List">
+        </div>
+        <div class="ref-grid" id="ref-grid" role="list" style="max-height: 260px;">
+          <!-- Will be populated dynamically by Javascript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Stats & Actions -->
+    <footer class="app-footer">
+      <div>High Score: <span id="highscore-display">0</span></div>
+      <div>
+        <button class="reset-btn" id="btn-reset-stats">Reset Progress</button>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
